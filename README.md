@@ -1,6 +1,6 @@
 # 插件列表增强 · dsh-plugin-page-tools
 
-给 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（DSH）插件页的「已安装插件」分组加上**搜索**和**分页**：插件装多了以后，不用翻一长条卡片也能立刻找到想启用或停用的那一个。
+给 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（DSH）插件页的「已安装插件」分组加上**搜索**、**分页**和**全部更新**：插件装多了不用翻一长条卡片找，检查完更新也能一次装完。
 
 ## 功能
 
@@ -9,6 +9,7 @@
   - 每页条数默认 10，可填 1–100，回车或失焦生效，记在本机 `localStorage`；
   - 改条数时保持你正在看的那张卡留在屏幕上，不会跳回第一页；
   - 只有一页时隐藏页码按钮，只留总数和每页条数。
+- **全部更新**：「刷新」按钮右边多一个「全部更新」按钮，带 `N` 表示上次检查里有几个插件可更新。点一下就把这几款插件逐个走一遍官方更新流程（确认 → 安装 → 完成 → 下一个），失败互不影响，官方失败自动回滚仍然生效。没有可更新的插件时按钮是禁用态。
 - **不会被打断**：官方页面重新渲染卡片（启用 / 停用插件、刷新、切标签）时，搜索词、页码和每页条数都会重新应用。
 - **只看「已安装插件」**：官方内置插件、实验性插件两个分组保持原样，不搜也不分页。
 - **双语**：文案通过 `ctx.locale` 注册 `zh` 与 `en`，跟随 DSH 界面语言。
@@ -89,9 +90,11 @@ dsh plugin --profile desktop remove dsh-plugin-page-tools
 
 ## English
 
-**dsh-plugin-page-tools** — search and pagination for the Installed group of the DeepSeek Harness Plugins page.
+**dsh-plugin-page-tools** — search, pagination and update-all for the Installed group of the DeepSeek Harness Plugins page.
 
 Search the installed plugins by title, description and package name (case-folded, space-separated words must all match), and page the cards with one right-aligned row: `1–10 of 22` · `Per page [10]` · `« ‹ 1 2 3 › »`. The cards per page (1–100, default 10) are remembered in `localStorage`, changing them keeps the card you were reading on screen, and the view survives every re-render of the shipped page. Only the Installed group is affected.
+
+Next to the shipped Refresh button sits **Update all** with a `N` badge for the plugins the last version check found an update for. One click runs each of them through the shipped update flow, one dialog after another; a failure affects only its own plugin and the shipped rollback still applies. The button stays disabled when nothing is pending, and it reads the manager's version checks instead of starting its own.
 
 Install with the DSH CLI:
 
