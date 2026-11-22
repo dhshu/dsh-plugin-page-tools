@@ -9,7 +9,8 @@
   - 每页条数默认 10，可填 1–100，回车或失焦生效，记在本机 `localStorage`；
   - 改条数时保持你正在看的那张卡留在屏幕上，不会跳回第一页；
   - 只有一页时隐藏页码按钮，只留总数和每页条数。
-- **全部更新**：「刷新」按钮右边多一个「全部更新」按钮，带 `N` 表示上次检查里有几个插件可更新。点一下就把这几款插件逐个走一遍官方更新流程（确认 → 安装 → 完成 → 下一个），失败互不影响，官方失败自动回滚仍然生效。没有可更新的插件时按钮是禁用态。
+- **全部更新**：「刷新」按钮右边多一个「全部更新」按钮，带 `N` 表示有几个插件可更新。点一下就把这几款插件逐个装好，没有多余确认框；失败互不影响，官方失败自动回滚仍然生效，失败的插件同一次会话里不会重复尝试。没有可更新的插件时按钮是禁用态。
+- **一个说明用标签页**：插件页顶部会多一个同名标签，里面只有一行说明——「全部更新」要读宿主的版本检查、调用宿主的更新动作，这些只在插件页自己的上下文里，官方约定就是通过贡献一个标签页来拿。功能仍然都在「已安装」里。
 - **不会被打断**：官方页面重新渲染卡片（启用 / 停用插件、刷新、切标签）时，搜索词、页码和每页条数都会重新应用。
 - **只看「已安装插件」**：官方内置插件、实验性插件两个分组保持原样，不搜也不分页。
 - **双语**：文案通过 `ctx.locale` 注册 `zh` 与 `en`，跟随 DSH 界面语言。
@@ -94,7 +95,9 @@ dsh plugin --profile desktop remove dsh-plugin-page-tools
 
 Search the installed plugins by title, description and package name (case-folded, space-separated words must all match), and page the cards with one right-aligned row: `1–10 of 22` · `Per page [10]` · `« ‹ 1 2 3 › »`. The cards per page (1–100, default 10) are remembered in `localStorage`, changing them keeps the card you were reading on screen, and the view survives every re-render of the shipped page. Only the Installed group is affected.
 
-Next to the shipped Refresh button sits **Update all** with a `N` badge for the plugins the last version check found an update for. One click runs each of them through the shipped update flow, one dialog after another; a failure affects only its own plugin and the shipped rollback still applies. The button stays disabled when nothing is pending, and it reads the manager's version checks instead of starting its own.
+Next to the shipped Refresh button sits **Update all** with a `N` badge for the plugins the manager finds an update for. One click installs each of them in turn without extra dialogs; a failure affects only its own plugin, the shipped rollback still applies, and a failed plugin is not retried in the same page session. The button stays disabled when nothing is pending.
+
+It also contributes one explanatory tab to the Plugins page. A contributed tab is the supported way to be rendered with the page's own context, which is where the Host's version list and update action live; everything else stays in the Installed tab.
 
 Install with the DSH CLI:
 

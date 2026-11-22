@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-page-tools",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Search, pagination and one-click update-all for the installed plugin list. · 插件列表增强：搜索已安装插件、可调每页条数，并在检查更新后一键全部更新。",
   "type": "module",
   "main": "./lib/index.js",
@@ -48,7 +48,18 @@
     "client": {
       "platform": "web",
       "immediately": true,
-      "inject": []
+      "inject": [],
+      "external": [
+        "@deepseek-ai/dsh-client-ui-plugin-manager/client"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-client-ui-plugin-manager": ">=0.2.2-rc.5 <0.3.0-0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-client-ui-plugin-manager": {
+      "optional": true
     }
   }
 }
