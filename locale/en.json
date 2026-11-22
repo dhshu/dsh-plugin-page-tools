@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Plugin List Tools",
-    "description": "Search the installed plugins, set cards per page, and update every plugin that has an update in one click.",
+    "description": "Search the installed plugins by name and description, with adjustable cards per page and one right-aligned pager row.",
     "detail": "docs/DETAIL.md"
   }
 }
