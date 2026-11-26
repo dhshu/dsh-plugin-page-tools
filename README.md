@@ -9,6 +9,7 @@
   - 每页条数默认 10，可填 1–100，回车或失焦生效，记在本机 `localStorage`；
   - 改条数时保持你正在看的那张卡留在屏幕上，不会跳回第一页；
   - 只有一页时隐藏页码按钮，只留总数和每页条数。
+- **记住页码**：当前页码记在本机（`localStorage` 的 `dsh-plugin-page-tools.page`），刷新或重新打开插件页后回到上次看的那一页；搜索或改每页条数后页码重新计算并同步更新，页数变少时自动收敛到最后一页。
 - **不会被打断**：官方页面重新渲染卡片（启用 / 停用插件、刷新、切标签）时，搜索词、页码和每页条数都会重新应用。
 - **只看「已安装插件」**：官方内置插件、实验性插件两个分组保持原样，不搜也不分页。
 - **双语**：文案通过 `ctx.locale` 注册 `zh` 与 `en`，跟随 DSH 界面语言。
@@ -68,7 +69,7 @@ dsh plugin --profile desktop remove dsh-plugin-page-tools
 
 ## 数据与持久化
 
-只用一个本机键 `dsh-plugin-page-tools.page-size` 记每页条数；其余状态（搜索词、页码、隐藏哪些卡片）只活在当前页面里。不上传任何数据，也不访问网络。
+只用两个本机键记视图状态：`dsh-plugin-page-tools.page-size` 记每页条数，`dsh-plugin-page-tools.page` 记当前页码；其余状态（搜索词、隐藏哪些卡片）只活在当前页面里。不上传任何数据，也不访问网络。
 
 ## 实现要点
 
@@ -91,7 +92,7 @@ dsh plugin --profile desktop remove dsh-plugin-page-tools
 
 **dsh-plugin-page-tools** — search and pagination for the Installed group of the DeepSeek Harness Plugins page.
 
-Search the installed plugins by title, description and package name (case-folded, space-separated words must all match), and page the cards with one right-aligned row: `1–10 of 22` · `Per page [10]` · `« ‹ 1 2 3 › »`. The cards per page (1–100, default 10) are remembered in `localStorage`, changing them keeps the card you were reading on screen, and the view survives every re-render of the shipped page. Only the Installed group is affected.
+Search the installed plugins by title, description and package name (case-folded, space-separated words must all match), and page the cards with one right-aligned row: `1–10 of 22` · `Per page [10]` · `« ‹ 1 2 3 › »`. The cards per page (1–100, default 10) and the current page are remembered in `localStorage`; reloading the Plugins page returns to the page you were reading. Changing them keeps the card you were reading on screen, and the view survives every re-render of the shipped page. Only the Installed group is affected.
 
 Install with the DSH CLI:
 
